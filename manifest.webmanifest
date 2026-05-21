@@ -1,0 +1,18 @@
+{
+  "name": "Winess Hub",
+  "short_name": "Winess Hub",
+  "description": "Application interne Winess pour commandes, préparations, livraisons, rappels, litiges, arrivages et stock Wino.",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#0b0f17",
+  "theme_color": "#0b0f17",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

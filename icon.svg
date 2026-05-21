@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Winess Hub">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0b0f17"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f8fafc"/>
+      <stop offset=".52" stop-color="#38bdf8"/>
+      <stop offset="1" stop-color="#22c55e"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="92" fill="url(#bg)"/>
+  <rect x="70" y="70" width="372" height="372" rx="52" fill="#151c29" stroke="#334155" stroke-width="10"/>
+  <path d="M134 170l58 180 62-134 62 134 62-180" fill="none" stroke="url(#mark)" stroke-width="36" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="383" cy="132" r="25" fill="#22c55e"/>
+</svg>

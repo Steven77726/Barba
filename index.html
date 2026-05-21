@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0f17">
+    <meta name="description" content="Winess Hub, cockpit interne pour commandes, préparations, livraisons, rappels, litiges, arrivages et stock Wino.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Winess Hub">
+    <title>Winess Hub</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" href="icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="icon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css?v=1">
+    <script type="module" src="app.js?v=1"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Navigation Winess Hub">
+        <a class="brand" href="#home" aria-label="Accueil Winess Hub">
+          <span class="brand-mark">W</span>
+          <span>
+            <strong>Winess Hub</strong>
+            <small>Ops interne</small>
+          </span>
+        </a>
+
+        <nav class="side-nav">
+          <a href="#home" data-route="home">Accueil</a>
+          <a href="#orders" data-route="orders">Commandes</a>
+          <a href="#preparations" data-route="preparations">Préparations</a>
+          <a href="#deliveries" data-route="deliveries">Livraisons</a>
+          <a href="#reminders" data-route="reminders">Rappels</a>
+          <a href="#disputes" data-route="disputes">Litiges</a>
+          <a href="#arrivals" data-route="arrivals">Arrivages</a>
+          <a href="#stock" data-route="stock">Stock Wino</a>
+        </nav>
+
+        <div class="sidebar-panel">
+          <span class="panel-label">Équipe connectée</span>
+          <div id="teamList" class="team-list"></div>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Cockpit Winess</p>
+            <h1 id="pageTitle">Accueil</h1>
+          </div>
+          <button class="icon-button" id="notificationButton" type="button" aria-label="Afficher les notifications">
+            <span class="bell" aria-hidden="true"></span>
+            <span id="notificationCount" class="notification-count">0</span>
+          </button>
+        </header>
+
+        <section class="ai-search" aria-label="Recherche IA globale">
+          <label for="globalSearch">Recherche IA</label>
+          <div class="search-row">
+            <input id="globalSearch" type="search" autocomplete="off" placeholder="Ex. livraison Romain Avi Rebibo Bala">
+            <button id="searchClearButton" type="button">Effacer</button>
+          </div>
+          <div id="searchResults" class="search-results" aria-live="polite"></div>
+        </section>
+
+        <section id="home" class="view is-active" aria-labelledby="home-title">
+          <h2 id="home-title" class="sr-only">Dashboard</h2>
+          <div id="kpiGrid" class="kpi-grid"></div>
+          <div class="dashboard-grid">
+            <section class="panel wide">
+              <div class="panel-head">
+                <h2>Commandes récentes</h2>
+                <a href="#orders">Tout voir</a>
+              </div>
+              <div id="recentOrders" class="list-stack"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Préparations en cours</h2>
+                <a href="#preparations">Gérer</a>
+              </div>
+              <div id="activePreparations" class="list-stack"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Livraisons en cours</h2>
+                <a href="#deliveries">Suivre</a>
+              </div>
+              <div id="activeDeliveries" class="list-stack"></div>
+            </section>
+            <section class="panel danger">
+              <div class="panel-head">
+                <h2>Rappels en retard</h2>
+                <a href="#reminders">Prioriser</a>
+              </div>
+              <div id="lateReminders" class="list-stack"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Litiges ouverts</h2>
+                <a href="#disputes">Traiter</a>
+              </div>
+              <div id="openDisputes" class="list-stack"></div>
+            </section>
+            <section class="panel">
+              <div class="panel-head">
+                <h2>Approvisionnements</h2>
+                <a href="#arrivals">Réserver</a>
+              </div>
+              <div id="arrivalSummary" class="list-stack"></div>
+            </section>
+            <section class="panel wide">
+              <div class="panel-head">
+                <h2>Activité récente</h2>
+              </div>
+              <div id="activityFeed" class="timeline"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="orders" class="view" aria-labelledby="orders-title">
+          <div class="section-head">
+            <h2 id="orders-title">Commandes</h2>
+            <button id="newOrderButton" type="button">Créer une commande mock</button>
+          </div>
+          <div id="ordersGrid" class="cards-grid"></div>
+        </section>
+
+        <section id="preparations" class="view" aria-labelledby="preparations-title">
+          <div class="section-head">
+            <h2 id="preparations-title">Préparations magasin</h2>
+            <p>David, Zac ou Didier demandent. Steven ou Théo préparent.</p>
+          </div>
+          <div id="preparationsGrid" class="cards-grid"></div>
+        </section>
+
+        <section id="deliveries" class="view" aria-labelledby="deliveries-title">
+          <div class="section-head">
+            <h2 id="deliveries-title">Livraisons Winess Livraison</h2>
+            <p>Synchronisation simulée avec remontée du statut “Livré”.</p>
+          </div>
+          <div id="deliveriesGrid" class="cards-grid"></div>
+        </section>
+
+        <section id="reminders" class="view" aria-labelledby="reminders-title">
+          <div class="section-head">
+            <h2 id="reminders-title">Rappels</h2>
+            <p>Toutes les tâches non terminées sont consolidées ici.</p>
+          </div>
+          <div id="remindersGrid" class="cards-grid"></div>
+        </section>
+
+        <section id="disputes" class="view" aria-labelledby="disputes-title">
+          <div class="section-head">
+            <h2 id="disputes-title">Litiges</h2>
+            <button id="newDisputeButton" type="button">Créer un litige mock</button>
+          </div>
+          <div id="disputesGrid" class="cards-grid"></div>
+        </section>
+
+        <section id="arrivals" class="view" aria-labelledby="arrivals-title">
+          <div class="section-head">
+            <h2 id="arrivals-title">Approvisionnements / arrivages</h2>
+            <p>Préventes, réservations et alerte si le solde devient négatif.</p>
+          </div>
+          <div id="arrivalsGrid" class="cards-grid"></div>
+        </section>
+
+        <section id="stock" class="view" aria-labelledby="stock-title">
+          <div class="section-head">
+            <h2 id="stock-title">Stock Wino</h2>
+            <p>Lecture live simulée. Winess Hub ne crée pas de stock parallèle.</p>
+          </div>
+          <div id="stockGrid" class="cards-grid"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="sendDeliveryDialog" class="modal">
+      <form method="dialog">
+        <div class="modal-head">
+          <h2>Envoyer au livreur</h2>
+          <button value="cancel" class="icon-button close-button" type="submit" aria-label="Fermer">×</button>
+        </div>
+        <p id="sendDeliverySummary"></p>
+        <label for="driverSelect">Livreur</label>
+        <select id="driverSelect"></select>
+        <menu>
+          <button value="cancel" type="submit">Annuler</button>
+          <button id="confirmSendDelivery" value="default" type="button">Envoyer et ouvrir</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <dialog id="notificationsDialog" class="modal">
+      <form method="dialog">
+        <div class="modal-head">
+          <h2>Notifications</h2>
+          <button value="cancel" class="icon-button close-button" type="submit" aria-label="Fermer">×</button>
+        </div>
+        <div id="notificationsList" class="list-stack"></div>
+      </form>
+    </dialog>
+  </body>
+</html>
